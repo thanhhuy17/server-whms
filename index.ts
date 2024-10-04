@@ -1,10 +1,13 @@
 import express from "express"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
+import userRouter from './src/routers/user'
 dotenv.config()
 
 const app = express()
 const dbURL = `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.whtk0sp.mongodb.net/`
+
+app.use('/auth', userRouter)
 
 const connectDB = async () => {
     try {
