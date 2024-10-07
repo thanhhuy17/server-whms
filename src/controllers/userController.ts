@@ -21,7 +21,7 @@ const register = async (req: any, res: any) => {
         const newUser: any = new UserModel(body)
         await newUser.save()
 
-        delete newUser.password;
+        delete newUser._doc.password;
 
         res.status(200).json({
             message: "Register",
