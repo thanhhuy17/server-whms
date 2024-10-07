@@ -1,6 +1,7 @@
 import UserModel from "../models/UserModel";
 import dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
+import { getAccessToken } from "../utils/getAccessToken";
 dotenv.config()
 const register = async (req: any, res: any) => {
     const body = req.body
@@ -17,12 +18,20 @@ const register = async (req: any, res: any) => {
 
         // console.log("HashPassWord: ", hashPassword);
         body.password = hashPassword
-        const newUser = new UserModel(body)
+        const newUser: any = new UserModel(body)
         await newUser.save()
-        delete newUser.password
+
+        delete newUser.password;
+
         res.status(200).json({
             message: "Register",
-            data: body,
+            data: {
+                ...newUser._doc, token: await getAccessToken({
+                    _id: newUser._id,
+                    email: newUser.email,
+                    rule: 1
+                }),
+            },
         })
     } catch (error: any) {
         res.status(404).json({
