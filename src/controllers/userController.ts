@@ -52,6 +52,12 @@ const login = async (req: any, res: any) => {
             throw new Error(`Tài khoản không tồn tại`)
         }
 
+        //Compare Password
+        const isMatchPassword = await bcrypt.compare(body.password, user.password)
+        if (!isMatchPassword) {
+            throw new Error("Đăng nhập thất bại \n Vui lòng kiểm tra lại Email/Password")
+        }
+
         delete user._doc.password;
 
         // Check Password ???
