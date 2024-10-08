@@ -3,9 +3,10 @@ import dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import { getAccessToken } from "../utils/getAccessToken";
 dotenv.config()
+//REGISTER
 const register = async (req: any, res: any) => {
     const body = req.body
-    const { email, name, password, confirmPassword } = body
+    const { email, name, password } = body
     try {
         const user = await UserModel.findOne({ email })
         if (user) {
@@ -24,7 +25,7 @@ const register = async (req: any, res: any) => {
         delete newUser._doc.password;
 
         res.status(200).json({
-            message: "Register",
+            message: "Register Successfully!",
             data: {
                 ...newUser._doc, token: await getAccessToken({
                     _id: newUser._id,
@@ -40,4 +41,37 @@ const register = async (req: any, res: any) => {
     }
 }
 
-export { register }
+//LOGIN
+const login = async (req: any, res: any) => {
+    const body = req.body
+    const { email, password } = body
+    try {
+        const user: any = await UserModel.findOne({ email })
+        //Check Email
+        if (!user) {
+            throw new Error(`Tài khoản không tồn tại`)
+        }
+
+        delete user._doc.password;
+
+        // Check Password ???
+
+        res.status(200).json({
+            message: "Login Successfully",
+            data: {
+                ...user._doc, token: await getAccessToken({
+                    _id: user._id,
+                    email: user.email,
+                    rule: user.rule ?? 1
+                }),
+            },
+        })
+    } catch (error: any) {
+        res.status(404).json({
+            message: error.message
+        })
+    }
+}
+
+
+export { register, login }

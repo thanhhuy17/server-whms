@@ -14,6 +14,11 @@ const UserSchema = new Schema({
         require: true
     },
 
+    rule: {
+        type: Number,
+        default: 1 // User = 1, Admin = 0
+    },
+
     createdAt: {
         type: Date,
         default: Date.now()
