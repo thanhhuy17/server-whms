@@ -2,8 +2,9 @@ import UserModel from "../models/UserModel";
 import dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import { getAccessToken } from "../utils/getAccessToken";
+import { generatorRandomText } from "../utils/generatorRandomText";
 dotenv.config()
-//REGISTER
+// REGISTER
 const register = async (req: any, res: any) => {
     const body = req.body
     const { email, name, password } = body
@@ -12,13 +13,11 @@ const register = async (req: any, res: any) => {
         if (user) {
             throw new Error(`Tài khoản đã tồn tại`)
         }
-        // console.log(body);
         const salt = await bcrypt.genSalt(10);
         // Hide => hash password
         const hashPassword = await bcrypt.hash(password, salt)
-
-        // console.log("HashPassWord: ", hashPassword);
         body.password = hashPassword
+
         const newUser: any = new UserModel(body)
         await newUser.save()
 
@@ -30,7 +29,7 @@ const register = async (req: any, res: any) => {
                 ...newUser._doc, token: await getAccessToken({
                     _id: newUser._id,
                     email: newUser.email,
-                    rule: 1
+                    rule: 1, // 1 User 0 Admin
                 }),
             },
         })
@@ -41,7 +40,7 @@ const register = async (req: any, res: any) => {
     }
 }
 
-//LOGIN
+// LOGIN
 const login = async (req: any, res: any) => {
     const body = req.body
     const { email, password } = body
@@ -79,5 +78,56 @@ const login = async (req: any, res: any) => {
     }
 }
 
+// LOGIN WITH GOOGLE
+const loginWithGoogle = async (req: any, res: any) => {
+    const body = req.body
+    const { email, name } = body
+    try {
+        const user: any = await UserModel.findOne({ email })
+        if (user) {
+            // throw new Error(`Tài khoản đã tồn tại`)
 
-export { register, login }
+            delete user._doc.password;
+
+            res.status(200).json({
+                message: "Login Successfully",
+                data: {
+                    ...user._doc, token: await getAccessToken({
+                        _id: user._id,
+                        email: user.email,
+                        rule: user.rule ?? 1
+                    }),
+                },
+            })
+        }
+        else {
+            const salt = await bcrypt.genSalt(10);
+            // Hide => hash password
+            const hashPassword = await bcrypt.hash(generatorRandomText(6), salt)
+
+            body.password = hashPassword
+            const newUser: any = new UserModel(body)
+            await newUser.save()
+
+            delete newUser._doc.password;
+
+            res.status(200).json({
+                message: "Login Successfully111!",
+                data: {
+                    ...newUser._doc,
+                    token: await getAccessToken({
+                        _id: newUser._id,
+                        email: newUser.email,
+                        rule: 1
+                    }),
+                },
+            })
+        }
+
+    } catch (error: any) {
+        res.status(404).json({
+            message: error.message
+        })
+    }
+}
+export { register, login, loginWithGoogle }
