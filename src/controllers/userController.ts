@@ -9,7 +9,7 @@ const register = async (req: any, res: any) => {
     const body = req.body
     const { name, email, password } = body
     try {
-        // if (!name) {
+        // if (!username) {
         //     throw new Error(`Username is required`)
         // }
         const user = await UserModel.findOne({ email })
@@ -21,21 +21,30 @@ const register = async (req: any, res: any) => {
         const hashPassword = await bcrypt.hash(password, salt)
         body.password = hashPassword
 
+        // Tạo người dùng mới
         const newUser: any = new UserModel(body)
-        await newUser.save()
+        // console.log('newUser:', newUser.toObject());
 
-        delete newUser._doc.password;
+        // Lưu người dùng vào cơ sở dữ liệu
+        await newUser.save() //Từ chỗ này là k còn thấy có thong tin của newUser.
 
+        // Xóa mật khẩu trước khi trả về phản hồi
+        delete newUser._doc?.password;
+        console.log('newUser:', newUser._doc?.email);
+
+
+        // Trả về phản hồi thành công
         res.status(200).json({
             message: "Register Successfully!",
             data: {
                 ...newUser._doc, token: await getAccessToken({
-                    _id: newUser._id,
-                    email: newUser.email,
+                    _id: newUser?._id,
+                    email: newUser?.email,
                     rule: 1, // 1 User 0 Admin
                 }),
             },
-        })
+        }
+        )
     } catch (error: any) {
         res.status(404).json({
             message: error.message
