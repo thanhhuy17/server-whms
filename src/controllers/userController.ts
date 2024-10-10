@@ -7,8 +7,11 @@ dotenv.config()
 // REGISTER
 const register = async (req: any, res: any) => {
     const body = req.body
-    const { email, name, password } = body
+    const { name, email, password } = body
     try {
+        // if (!name) {
+        //     throw new Error(`Username is required`)
+        // }
         const user = await UserModel.findOne({ email })
         if (user) {
             throw new Error(`Tài khoản đã tồn tại`)
@@ -112,7 +115,7 @@ const loginWithGoogle = async (req: any, res: any) => {
             delete newUser._doc.password;
 
             res.status(200).json({
-                message: "Login Successfully111!",
+                message: "Login Successfully!",
                 data: {
                     ...newUser._doc,
                     token: await getAccessToken({

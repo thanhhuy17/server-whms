@@ -8,8 +8,8 @@ export const getAccessToken = async (payload: {
     email: string | null | undefined,
     rule?: number
 }) => {
-    const token = jwt.sign(payload, process.env.SECRET_KEY as string, 
-        // { expiresIn: 60 }
+    const token = jwt.sign(payload, process.env.SECRET_KEY as string,
+        // { expiresIn: 300 }
     )
 
     return token;
