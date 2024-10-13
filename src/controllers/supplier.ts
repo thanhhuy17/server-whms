@@ -1,9 +1,11 @@
 import SupplierModel from "../models/SupplierModel"
 
+
+// -------- GET ALL SUPPLIERS -----------
 const getSuppliers = async (req: any, res: any) => {
     try {
         res.status(200).json({
-            message: 'Get Suppliers Successfully',
+            message: 'Get All Suppliers Successfully',
             data: []
         })
     } catch (error: any) {
@@ -13,6 +15,7 @@ const getSuppliers = async (req: any, res: any) => {
     }
 }
 
+// -------- ADD NEW SUPPLIER ---------
 const addNewSupplier = async (req: any, res: any) => {
     const body = req.body
 
@@ -20,7 +23,7 @@ const addNewSupplier = async (req: any, res: any) => {
         const newSupplier = new SupplierModel(body)
         newSupplier.save()
         res.status(200).json({
-            message: 'Add new Supplier successfully',
+            message: 'Add New Supplier Successfully',
             data: newSupplier,
         })
     } catch (error: any) {
