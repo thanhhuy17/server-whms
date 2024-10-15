@@ -5,6 +5,7 @@ const supplierSchema = new Schema({
         type: String,
         require: true
     },
+    slug: String,
     product: String,
     categories: {
         type: [String]
