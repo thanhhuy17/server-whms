@@ -2,11 +2,13 @@ import SupplierModel from "../models/SupplierModel"
 
 
 // -------- GET ALL SUPPLIERS -----------
-const getSuppliers = async (req: any, res: any) => {
+const getSuppliers = async (_req: any, res: any) => {
+
     try {
+        const items = await SupplierModel.find({})
         res.status(200).json({
             message: 'Get All Suppliers Successfully',
-            data: []
+            data: items
         })
     } catch (error: any) {
         res.status(404).json({

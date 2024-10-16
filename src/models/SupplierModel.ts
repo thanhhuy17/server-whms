@@ -7,11 +7,12 @@ const supplierSchema = new Schema({
     },
     slug: String,
     product: String,
+    email: String,
     categories: {
         type: [String]
     },
     price: Number,
-    contact: String,
+    contactNumber: String,
     isTaking: {
         type: Number,
         default: 0,
