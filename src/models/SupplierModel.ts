@@ -14,7 +14,7 @@ const supplierSchema = new Schema({
     price: Number,
     contactNumber: String,
     isTaking: {
-        type: Number,
+        type: Boolean,
         default: 0,
         enum: [0, 1]
     },
