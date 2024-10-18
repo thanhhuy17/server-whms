@@ -5,7 +5,7 @@ import SupplierModel from "../models/SupplierModel"
 const getSuppliers = async (_req: any, res: any) => {
 
     try {
-        const items = await SupplierModel.find({})
+        const items = await SupplierModel.find({isDeleted: false})
         res.status(200).json({
             message: 'Get All Suppliers Successfully',
             data: items
@@ -34,5 +34,41 @@ const addNewSupplier = async (req: any, res: any) => {
         })
     }
 }
+// -------- UPDATE SUPPLIER ---------
+const updateSupplier = async (req: any, res: any) => {
+    const body = req.body
+    const {id} = req.query
+    try {
+        
+        await SupplierModel.findByIdAndUpdate(id, body)
 
-export { getSuppliers, addNewSupplier }
+        res.status(200).json({
+            message: `Supplier Updated`,
+            data: [],
+        })
+    } catch (error: any) {
+        res.status(404).json({
+            message: error.message
+        })
+    }
+}
+// -------- DELETE SUPPLIER ---------
+const deleteSupplier = async (req: any, res: any) => {
+
+    const {id} = req.query
+    try {
+        
+        await SupplierModel.findByIdAndDelete(id)
+
+        res.status(200).json({
+            message: `Supplier Deleted`,
+            data: [],
+        })
+    } catch (error: any) {
+        res.status(404).json({
+            message: error.message
+        })
+    }
+}
+
+export { getSuppliers, addNewSupplier, updateSupplier, deleteSupplier}
