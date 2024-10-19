@@ -8,6 +8,7 @@ const supplierSchema = new Schema({
     slug: String,
     product: String,
     email: String,
+    active: Number,
     categories: {
         type: [String]
     },
