@@ -2,11 +2,13 @@ import SupplierModel from "../models/SupplierModel"
 
 
 // -------- GET ALL SUPPLIERS -----------
-const getSuppliers = async (_req: any, res: any) => {
-
+const getSuppliers = async (req: any, res: any) => {
+    const { pageSize, page } = req.query
+    console.log("Test Page:  ", pageSize, page);
     try {
+        const skip = (page - 1) * pageSize
         // Only Show Supplier have isDeleted === false
-        const items = await SupplierModel.find({ isDeleted: false })
+        const items = await SupplierModel.find({ isDeleted: false }).skip(skip).limit(pageSize)
         res.status(200).json({
             message: 'Get All Suppliers Successfully',
             data: items
