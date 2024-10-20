@@ -20,6 +20,11 @@ const supplierSchema = new Schema({
         enum: [0, 1]
     },
     photoUrl: String,
+    status: {
+        type: String,
+        enum: ["New", "Pending", "Approved", "Rejected", "Blacklisted"],
+        default: 'New'
+    },
     createdAt: {
         type: Date,
         default: Date.now()
