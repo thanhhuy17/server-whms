@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt'
 import { getAccessToken } from "../utils/getAccessToken";
 import { generatorRandomText } from "../utils/generatorRandomText";
 dotenv.config()
-// REGISTER
+// ------------------ REGISTER ---------------------
 const register = async (req: any, res: any) => {
     const body = req.body
     const { name, email, password } = body
