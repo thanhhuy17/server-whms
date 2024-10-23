@@ -3,15 +3,21 @@ import SupplierModel from "../models/SupplierModel"
 
 // -------- GET ALL SUPPLIERS -----------
 const getSuppliers = async (req: any, res: any) => {
-    const { pageSize, page } = req.query
-    console.log("Test Page:  ", pageSize, page);
+    const { page, pageSize } = req.query
+    console.log("Test Page:  ", page, pageSize);
     try {
         const skip = (page - 1) * pageSize
         // Only Show Supplier have isDeleted === false
-        const items = await SupplierModel.find({ isDeleted: false }).skip(skip).limit(pageSize)
+        const items = await SupplierModel.find({ isDeleted: false }).skip(skip).limit(pageSize);
+
+        // Total row
+        const total = await SupplierModel.countDocuments()
+        console.log("Check Total: ", total);
+ 
+
         res.status(200).json({
             message: 'Get All Suppliers Successfully',
-            data: items
+            data: { total, items }
         })
     } catch (error: any) {
         res.status(404).json({
