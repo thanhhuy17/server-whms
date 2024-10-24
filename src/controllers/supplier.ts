@@ -88,34 +88,89 @@ const getFormSupplier = async (req: any, res: any) => {
             layout: `horizontal`,
             labelCol: 6,
             wrapperCol: 18,
+            size: `middle`,
             formItems: [
                 {
                     key: `name`,
-                    value: `name`,
+                    value: `name`, // name
+                    require: true,
+                    message: `Please Enter Supplier Name!`,
                     label: `Supplier Name`,
                     placeholder: `Enter Supplier Name`,
-                    type: `default`,
-                    require: true,
-                    message: `Please Enter Supplier Name!`
+                    type: `default`
+
                 },
                 {
-                    key: `name2`,
-                    value: `name`,
-                    label: `Supplier Name`,
-                    placeholder: `Enter Supplier Name`,
-                    type: `default`,
+                    key: `email`,
+                    value: `email`, //name
                     require: true,
-                    message: `Please Enter Supplier Name!`
+                    message: `Please Enter Email!`,
+                    label: `Email`,
+                    placeholder: `Enter Supplier Email`,
+                    type: `default`,
+
                 },
                 {
-                    key: `name3`,
-                    value: `name`,
-                    label: `Supplier Name`,
-                    placeholder: `Enter Supplier Name`,
-                    type: `default`,
+                    key: `product`,
+                    value: `product`, //name
                     require: true,
-                    message: `Please Enter Supplier Name!`
+                    message: `Enter Product!`,
+                    label: `Product`,
+                    placeholder: `Enter Product`,
+                    type: `default`,
+
                 },
+                {
+                    key: `category`,
+                    value: `category`, //name
+                    // require: true,
+                    // message: `Enter Product!`,
+                    label: `Category`,
+                    placeholder: `Select product category`,
+                    type: `select`,
+
+                },
+                {
+                    key: `price`,
+                    value: `price`, //name
+                    // require: true,
+                    // message: `Enter Product!`,
+                    label: `Buying Price`,
+                    placeholder: `Enter buying price`,
+                    type: `default`,
+
+                },
+                {
+                    key: `contactNumber`,
+                    value: `contactNumber`, //name
+                    // require: true,
+                    // message: `Enter Product!`,
+                    label: `Contact Number`,
+                    placeholder: `Enter supplier contact number`,
+                    type: `default`,
+
+                },
+                {
+                    key: `active`,
+                    value: `active`, //name
+                    // require: true,
+                    // message: `Enter Product!`,
+                    label: `Active`,
+                    placeholder: `Enter Active number`,
+                    type: `default`,
+
+                },
+                {
+                    key: `type`,
+                    value: `type`, //name
+                    // require: true,
+                    // message: `Enter Product!`,
+                    label: `Type`,
+                    // placeholder: `Enter Active number`,
+                    type: `button`,
+
+                },
+
             ]
         }
         res.status(200).json({
