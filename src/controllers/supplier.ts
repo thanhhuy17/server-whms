@@ -13,7 +13,7 @@ const getSuppliers = async (req: any, res: any) => {
         // Total row
         const total = await SupplierModel.countDocuments()
         console.log("Check Total: ", total);
- 
+
 
         res.status(200).json({
             message: 'Get All Suppliers Successfully',
@@ -80,4 +80,54 @@ const deleteSupplier = async (req: any, res: any) => {
     }
 }
 
-export { getSuppliers, addNewSupplier, updateSupplier, deleteSupplier }
+// -------- GET FORM SUPPLIER DYNAMIC ---------
+const getFormSupplier = async (req: any, res: any) => {
+    try {
+        const form = {
+            title: `Supplier`,
+            layout: `horizontal`,
+            labelCol: 6,
+            wrapperCol: 18,
+            formItems: [
+                {
+                    key: `name`,
+                    value: `name`,
+                    label: `Supplier Name`,
+                    placeholder: `Enter Supplier Name`,
+                    type: `default`,
+                    require: true,
+                    message: `Please Enter Supplier Name!`
+                },
+                {
+                    key: `name2`,
+                    value: `name`,
+                    label: `Supplier Name`,
+                    placeholder: `Enter Supplier Name`,
+                    type: `default`,
+                    require: true,
+                    message: `Please Enter Supplier Name!`
+                },
+                {
+                    key: `name3`,
+                    value: `name`,
+                    label: `Supplier Name`,
+                    placeholder: `Enter Supplier Name`,
+                    type: `default`,
+                    require: true,
+                    message: `Please Enter Supplier Name!`
+                },
+            ]
+        }
+        res.status(200).json({
+            message: `Get Form Success`,
+            data: form
+        })
+    } catch (error: any) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+}
+
+
+export { getSuppliers, addNewSupplier, updateSupplier, deleteSupplier, getFormSupplier }
