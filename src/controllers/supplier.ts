@@ -89,6 +89,7 @@ const getFormSupplier = async (req: any, res: any) => {
             labelCol: 6,
             wrapperCol: 18,
             size: `middle`,
+            // typeInput: `number`,
             formItems: [
                 {
                     key: `name`,
@@ -97,7 +98,7 @@ const getFormSupplier = async (req: any, res: any) => {
                     message: `Please Enter Supplier Name!`,
                     label: `Supplier Name`,
                     placeholder: `Enter Supplier Name`,
-                    type: `default`
+                    type: `input`
 
                 },
                 {
@@ -107,7 +108,7 @@ const getFormSupplier = async (req: any, res: any) => {
                     message: `Please Enter Email!`,
                     label: `Email`,
                     placeholder: `Enter Supplier Email`,
-                    type: `default`,
+                    type: `input`,
 
                 },
                 {
@@ -117,7 +118,7 @@ const getFormSupplier = async (req: any, res: any) => {
                     message: `Enter Product!`,
                     label: `Product`,
                     placeholder: `Enter Product`,
-                    type: `default`,
+                    type: `input`,
 
                 },
                 {
@@ -137,7 +138,7 @@ const getFormSupplier = async (req: any, res: any) => {
                     // message: `Enter Product!`,
                     label: `Buying Price`,
                     placeholder: `Enter buying price`,
-                    type: `default`,
+                    type: `input`,
 
                 },
                 {
@@ -147,7 +148,7 @@ const getFormSupplier = async (req: any, res: any) => {
                     // message: `Enter Product!`,
                     label: `Contact Number`,
                     placeholder: `Enter supplier contact number`,
-                    type: `default`,
+                    type: `input`,
 
                 },
                 {
@@ -157,7 +158,9 @@ const getFormSupplier = async (req: any, res: any) => {
                     // message: `Enter Product!`,
                     label: `Active`,
                     placeholder: `Enter Active number`,
-                    type: `default`,
+                    type: `input`,
+                    typeInput: `number`,
+
 
                 },
                 {
