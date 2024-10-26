@@ -89,11 +89,10 @@ const getFormSupplier = async (req: any, res: any) => {
             labelCol: 6,
             wrapperCol: 18,
             size: `middle`,
-            // typeInput: `number`,
             formItems: [
                 {
                     key: `name`,
-                    value: `name`, // name
+                    value: `name`,
                     require: true,
                     message: `Please Enter Supplier Name!`,
                     label: `Supplier Name`,
@@ -103,7 +102,7 @@ const getFormSupplier = async (req: any, res: any) => {
                 },
                 {
                     key: `email`,
-                    value: `email`, //name
+                    value: `email`,
                     require: true,
                     message: `Please Enter Email!`,
                     label: `Email`,
@@ -113,7 +112,7 @@ const getFormSupplier = async (req: any, res: any) => {
                 },
                 {
                     key: `product`,
-                    value: `product`, //name
+                    value: `product`,
                     require: true,
                     message: `Enter Product!`,
                     label: `Product`,
@@ -123,7 +122,7 @@ const getFormSupplier = async (req: any, res: any) => {
                 },
                 {
                     key: `category`,
-                    value: `category`, //name
+                    value: `category`,
                     // require: true,
                     // message: `Enter Product!`,
                     label: `Category`,
@@ -133,7 +132,7 @@ const getFormSupplier = async (req: any, res: any) => {
                 },
                 {
                     key: `price`,
-                    value: `price`, //name
+                    value: `price`,
                     // require: true,
                     // message: `Enter Product!`,
                     label: `Buying Price`,
@@ -143,7 +142,7 @@ const getFormSupplier = async (req: any, res: any) => {
                 },
                 {
                     key: `contactNumber`,
-                    value: `contactNumber`, //name
+                    value: `contactNumber`,
                     // require: true,
                     // message: `Enter Product!`,
                     label: `Contact Number`,
@@ -153,13 +152,13 @@ const getFormSupplier = async (req: any, res: any) => {
                 },
                 {
                     key: `active`,
-                    value: `active`, //name
+                    value: `active`,
                     // require: true,
                     // message: `Enter Product!`,
                     label: `Active`,
                     placeholder: `Enter Active number`,
-                    type: `input`,
-                    typeInput: `number`,
+                    type: `number`,
+                    // typeInput: `number`,
 
 
                 },
@@ -168,9 +167,9 @@ const getFormSupplier = async (req: any, res: any) => {
                     value: `type`, //name
                     // require: true,
                     // message: `Enter Product!`,
-                    label: `Type`,
+                    label: `Taking Return`,
                     // placeholder: `Enter Active number`,
-                    type: `button`,
+                    type: `checkbox`,
 
                 },
 
