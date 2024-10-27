@@ -26,7 +26,7 @@ const supplierSchema = new Schema({
         default: 'New'
     },
     userCreated: String,
-    createdAt: {
+    dateCreated: {
         type: Date,
         default: Date.now()
     },
@@ -37,7 +37,12 @@ const supplierSchema = new Schema({
     isDeleted: {
         type: Boolean,
         default: false
-    }
+    },
+    userEdited: String,
+    dateEdited: {
+        type: Date,
+        default: Date.now()
+    },
 })
 
 const SupplierModel = mongoose.model("suppliers", supplierSchema)
