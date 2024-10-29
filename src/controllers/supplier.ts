@@ -84,14 +84,7 @@ const deleteSupplier = async (req: any, res: any) => {
 // -------- GET FORM SUPPLIER DYNAMIC ---------
 const getFormSupplier = async (req: any, res: any) => {
     try {
-        const form = {
-            title: `Supplier`,
-            layout: `horizontal`,
-            labelCol: 6,
-            wrapperCol: 18,
-            size: `middle`,
-            formItems: supplierForm
-        }
+        const form = supplierForm
         res.status(200).json({
             message: `Get Form Success`,
             data: form
