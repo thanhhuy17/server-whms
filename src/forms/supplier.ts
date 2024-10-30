@@ -15,7 +15,7 @@ export const supplierForm = {
             label: `Supplier Name`,
             placeholder: `Enter Supplier Name`,
             type: `input`,
-            displayLength: 200
+            displayLength: 160
 
         },
         {
@@ -26,7 +26,7 @@ export const supplierForm = {
             label: `Email`,
             placeholder: `Enter Supplier Email`,
             type: `input`,
-            // displayLength: 150
+            displayLength: 200
 
 
         },
@@ -38,7 +38,7 @@ export const supplierForm = {
             label: `Product`,
             placeholder: `Enter Product`,
             type: `input`,
-            // displayLength: 150
+            displayLength: 150
 
         },
         {
@@ -83,7 +83,7 @@ export const supplierForm = {
             placeholder: `Enter Active number`,
             type: `number`,
             // typeInput: `number`,
-            displayLength: 150
+            displayLength: 50
 
         },
         {
@@ -94,7 +94,7 @@ export const supplierForm = {
             label: `Taking Return`,
             // placeholder: `Enter Active number`,
             type: `checkbox`,
-            // displayLength: 150
+            displayLength: 150
 
         },
 
