@@ -6,6 +6,7 @@ export const supplierForm = {
     wrapperCol: 18,
     labelAlign: "left",
     size: `middle`,
+    nameButton: `Add Supplier`, //Add Supplier
     formItems: [
         {
             key: `name`,
