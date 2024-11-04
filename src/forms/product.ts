@@ -33,7 +33,7 @@ export const productForm = {
         {
             key: `category`,
             value: `category`,
-            // require: true,
+            require: false,
             message: `Please Select Category!`,
             label: `Category`,
             placeholder: `Select product category`,
@@ -44,7 +44,7 @@ export const productForm = {
         {
             key: `buyingPrice`,
             value: `buyingPrice`,
-            require: true,
+            require: false,
             message: `Please Enter Buying Price!`,
             label: `Buying Price`,
             placeholder: `Enter buying price`,
@@ -55,7 +55,7 @@ export const productForm = {
         {
             key: `quantity`,
             value: `quantity`,
-            require: true,
+            require: false,
             message: `Please Enter Quantity!`,
             label: `Quantity`,
             placeholder: `Enter product quantity`,
@@ -66,7 +66,7 @@ export const productForm = {
         {
             key: `unit`,
             value: `unit`,
-            require: true,
+            require: false,
             message: `Please Enter Unit!`,
             label: `Unit`,
             placeholder: `Enter product unit`,
@@ -78,19 +78,18 @@ export const productForm = {
             // Chỉnh lại
             key: `expiryDate`,
             value: `expiryDate`,
-            require: true,
+            require: false,
             message: `Please Enter Expiry Date!`,
             label: `Expiry Date`,
             placeholder: `Enter expiry date`,
-            type: `input`,
+            type: `dateTime`,
             displayLength: 160
 
         },
         {
-            // Chỉnh lại
             key: `thresholdValue`,
             value: `thresholdValue`,
-            require: true,
+            require: false,
             message: `Please Enter Threshold Value!`,
             label: `Threshold Value`,
             placeholder: `Enter threshold value`,
