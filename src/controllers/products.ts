@@ -3,10 +3,21 @@ import ProductModel from "../models/ProductModel"
 
 // -------- GET ALL PRODUCTS -----------
 const getProduct = async (req: any, res: any) => {
+    const {page, pageSize} = req.query
+    console.log("Test Page Product: ", page, pageSize);
     try {
+        const skip = (page - 1) * pageSize
+
+        // Only Show Supplier have isDeleted === false
+        const items = await ProductModel.find({ isDeleted: false }).skip(skip).limit(pageSize);
+
+        // Total Row Product
+        const total = await ProductModel.countDocuments()
+        console.log("Check Total Page Products: ", total);
+
         res.status(200).json({
-            message: 'Get Products Successfully',
-            data: []
+            message: 'Get All Products Successfully',
+            data: {total, items}
         })
     } catch (error: any) {
         res.status(404).json({

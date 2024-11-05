@@ -1,3 +1,4 @@
+import moment from "moment";
 import mongoose, { Schema } from "mongoose";
 
 const ProductSchema = new Schema({
@@ -19,7 +20,8 @@ const ProductSchema = new Schema({
     thresholdValue: Number,
     expiryDate: {
         type: Date,
-        default: Date.now()
+        default: Date.now,
+        get: (date: Date) => moment(date).format("DD-MM-YYYY")
     },
     status: {
         type: String,
@@ -29,11 +31,11 @@ const ProductSchema = new Schema({
     userCreated: String,
     dateCreated: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
     updatedAt: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
     isDeleted: {
         type: Boolean,
@@ -42,7 +44,7 @@ const ProductSchema = new Schema({
     userEdited: String,
     dateEdited: {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
 
 })
