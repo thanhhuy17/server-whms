@@ -21,7 +21,6 @@ const ProductSchema = new Schema({
     expiryDate: {
         type: Date,
         default: Date.now,
-        get: (date: Date) => moment(date).format("DD-MM-YYYY")
     },
     status: {
         type: String,
