@@ -42,6 +42,9 @@ const addNewProduct = async (req: any, res: any) => {
         })
     }
 }
+// ------------ UPDATE PRODUCT ------------
+
+
 // -------- GET FORM PRODUCT DYNAMIC ---------
 const getFormProduct = async (req: any, res: any) => {
     try {

@@ -1,4 +1,4 @@
-import moment from "moment";
+// import moment from "moment";
 import mongoose, { Schema } from "mongoose";
 
 const ProductSchema = new Schema({
@@ -12,7 +12,7 @@ const ProductSchema = new Schema({
     },
     slug: String,
     categories: {
-        type: [String]
+        type: [String],
     },
     buyingPrice: Number,
     quantity: Number,
@@ -32,10 +32,10 @@ const ProductSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    },
+    // updatedAt: {
+    //     type: Date,
+    //     default: Date.now
+    // },
     isDeleted: {
         type: Boolean,
         default: false
