@@ -49,6 +49,8 @@ const addNewSupplier = async (req: any, res: any) => {
 const updateSupplier = async (req: any, res: any) => {
     const body = req.body
     const { id } = req.query
+    // console.log("Check id: ", id);
+
     try {
 
         await SupplierModel.findByIdAndUpdate(id, body)
