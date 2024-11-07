@@ -98,6 +98,34 @@ const getFormSupplier = async (req: any, res: any) => {
         })
     }
 }
+// -------- GET  SUPPLIERS FOR EXPORT -----------
+const getSuppliersForExport = async (req: any, res: any) => {
+    const body = req.body;
+    const { start, end } = req.query;
+    // console.log("Check date send to Server:  ", body, start, end);
+    const filter: any={}
+    if(start && end){
+        filter.createdAt = {
+            $lte:end,
+            $gte: start
+        }
+    }
+
+    try {
+        const items = await SupplierModel.find(filter)
+        console.log("check items: ",items.length);
 
 
-export { getSuppliers, addNewSupplier, updateSupplier, deleteSupplier, getFormSupplier }
+        res.status(200).json({
+            message: 'Get Suppliers Export Successfully',
+            data: []
+        })
+    } catch (error: any) {
+        res.status(404).json({
+            message: error.message
+            // message: "error.message HUY"
+        })
+    }
+}
+
+export { getSuppliers, addNewSupplier, updateSupplier, deleteSupplier, getFormSupplier, getSuppliersForExport }

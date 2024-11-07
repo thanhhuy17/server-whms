@@ -25,6 +25,10 @@ const supplierSchema = new Schema({
         enum: ["New", "Pending", "Approved", "Rejected", "Blacklisted"],
         default: 'New'
     },
+    createdAt: {
+        type: Date,
+        default: Date.now()
+    },
     userCreated: String,
     dateCreated: {
         type: Date,

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addNewSupplier, deleteSupplier, getFormSupplier, getSuppliers, updateSupplier } from "../controllers/supplier";
+import { addNewSupplier, deleteSupplier, getFormSupplier, getSuppliers, getSuppliersForExport, updateSupplier } from "../controllers/supplier";
 
 const router = Router()
 // Get All cho phep frontend lay du lieu
@@ -12,5 +12,6 @@ router.put('/update-supplier', updateSupplier)
 router.delete('/delete-supplier', deleteSupplier)
 // Get Form Supplier API
 router.get(`/get-form-supplier`, getFormSupplier)
-
+// Đưa dữ liệu ngày tháng từ frontend lên
+router.post(`/get-export-data`, getSuppliersForExport)
 export default router
