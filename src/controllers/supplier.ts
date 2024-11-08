@@ -103,17 +103,30 @@ const getSuppliersForExport = async (req: any, res: any) => {
     const body = req.body;
     const { start, end } = req.query;
     // console.log("Check date send to Server:  ", body, start, end);
-    const filter: any={}
-    if(start && end){
+    const filter: any = {}
+    if (start && end) {
         filter.createdAt = {
-            $lte:end,
+            $lte: end,
             $gte: start
         }
     }
 
     try {
         const items = await SupplierModel.find(filter)
-        console.log("check items: ",items.length);
+        // console.log("check items: ",items.length);
+
+        const data: any = [];
+        if (items.length > 0) {
+            items.forEach((item: any) => {
+                const value: any = {};
+
+                body.forEach((key: string) => {
+                    value[`${key}`] = `${item._doc[`${key}`] ?? ""}`
+
+                })
+                console.log("check value: ",value);
+            })
+        }
 
 
         res.status(200).json({
