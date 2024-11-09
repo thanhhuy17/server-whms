@@ -17,7 +17,7 @@ app.use('/auth', userRouter)
 
 // ------ VERIFY TOKEN --------
 app.use(verifyToken)
-app.use('/storage', storageRouter) // product
+app.use('/product', storageRouter) // product
 app.use('/supplier', supplierRouter) // supplier
 
 const connectDB = async () => {

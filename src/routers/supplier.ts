@@ -13,5 +13,5 @@ router.delete('/delete-supplier', deleteSupplier)
 // Get Form Supplier API
 router.get(`/get-form-supplier`, getFormSupplier)
 // Đưa dữ liệu ngày tháng từ frontend lên
-router.post(`/get-export-data`, getSuppliersForExport)
+router.post(`/get-export-data-supplier`, getSuppliersForExport)
 export default router

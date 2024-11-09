@@ -98,4 +98,44 @@ const getFormProduct = async (req: any, res: any) => {
     }
 }
 
-export { getProduct, addNewProduct, getFormProduct, deleteProduct, updateProduct }
+// --------------- GET PRODUCTS FOR EXPORT ---------------------
+const getProductForExport = async (req: any, res: any) => {
+    const body = req.body
+    const { start, end } = req.query
+    console.log("getProductForExport: ", body, start, end);
+
+    const filter: any = {}
+    if (start && end) {
+        filter.createdAt = {
+            $lte: end,
+            $gte: start
+        }
+    }
+
+    try {
+        const items = await ProductModel.find(filter)
+        const data: any = []
+        if (items.length > 0) {
+            items.forEach((item: any) => {
+                const value: any = {}
+
+                body.forEach((key: string) => {
+                    value[`${key}`] = `${item._doc[`${key}`] ?? ""}`
+                })
+                data.push(value)
+            })
+        }
+
+        res.status(200).json({
+            message: "Get Products For Export Excel Successfully",
+            data: data
+        })
+
+    } catch (error: any) {
+        res.status(404).json({
+            message: error.message
+        })
+    }
+}
+
+export { getProduct, addNewProduct, getFormProduct, deleteProduct, updateProduct, getProductForExport }
