@@ -98,7 +98,7 @@ const getFormSupplier = async (req: any, res: any) => {
         })
     }
 }
-// -------- GET  SUPPLIERS FOR EXPORT -----------
+// -------- GET SUPPLIERS FOR EXPORT -----------
 const getSuppliersForExport = async (req: any, res: any) => {
     const body = req.body;
     const { start, end } = req.query;
@@ -124,14 +124,15 @@ const getSuppliersForExport = async (req: any, res: any) => {
                     value[`${key}`] = `${item._doc[`${key}`] ?? ""}`
 
                 })
-                console.log("check value: ",value);
+                // console.log("check value: ",value);
+                data.push(value)
             })
         }
 
 
         res.status(200).json({
             message: 'Get Suppliers Export Successfully',
-            data: []
+            data: data
         })
     } catch (error: any) {
         res.status(404).json({
