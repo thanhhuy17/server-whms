@@ -17,6 +17,7 @@ const ProductSchema = new Schema({
     buyingPrice: Number,
     quantity: Number,
     unit: [String],
+    photoUrl: String,
     thresholdValue: Number,
     expiryDate: {
         type: Date,
