@@ -57,9 +57,7 @@ const ProductSchema = new Schema({
     },
     slug: String,
     description: String,
-    categories: {
-        type: [String],
-    },
+    categories: [String],
     supplier:{
         require: true,
         type: String

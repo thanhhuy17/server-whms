@@ -1,3 +1,4 @@
+import { addNewProductForm } from "../forms/addNewProduct";
 import { productForm } from "../forms/product"
 import ProductModel from "../models/ProductModel"
 
@@ -98,6 +99,21 @@ const getFormProduct = async (req: any, res: any) => {
     }
 }
 
+// -------- GET FORM ADD NEW PRODUCT DYNAMIC ---------
+const getFormAddNewProduct = async (req: any, res: any) => {
+    try {
+        const form = addNewProductForm
+        res.status(200).json({
+            message: `Get Form Add New Product Success`,
+            data: form
+        })
+    } catch (error: any) {
+        res.status(400).json({
+            message: error.message
+        })
+    }
+}
+
 // --------------- GET PRODUCTS FOR EXPORT ---------------------
 const getProductForExport = async (req: any, res: any) => {
     const body = req.body
@@ -138,4 +154,4 @@ const getProductForExport = async (req: any, res: any) => {
     }
 }
 
-export { getProduct, addNewProduct, getFormProduct, deleteProduct, updateProduct, getProductForExport }
+export { getProduct, addNewProduct, getFormProduct, deleteProduct, updateProduct, getProductForExport, getFormAddNewProduct }
