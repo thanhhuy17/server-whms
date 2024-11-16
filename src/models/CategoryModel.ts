@@ -4,6 +4,7 @@ const CategorySchema = new Schema({
         type: String,
         required: true
     },
+    parentId: String,
     slug: {
         type: String
     },
