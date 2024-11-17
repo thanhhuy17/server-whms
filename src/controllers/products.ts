@@ -181,6 +181,22 @@ const addNewCategory = async (req: any, res: any) => {
   }
 };
 
+// -------- GET CATEGORIES -----------
+const getCategories = async (req: any, res: any) => {
+
+    try {
+      const categories = await CategoryModel.find();
+      res.status(200).json({
+        message: `Add New Category Successfully`,
+        data: categories,
+      });
+    } catch (error: any) {
+      res.status(404).json({
+        message: error.message,
+      });
+    }
+  };
+
 export {
   getProduct,
   addNewProduct,
@@ -190,4 +206,5 @@ export {
   getProductForExport,
   getFormAddNewProduct,
   addNewCategory,
+  getCategories
 };

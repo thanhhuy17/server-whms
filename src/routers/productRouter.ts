@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addNewCategory, addNewProduct, deleteProduct, getFormAddNewProduct, getFormProduct, getProduct, getProductForExport, updateProduct } from "../controllers/products";
+import { addNewCategory, addNewProduct, deleteProduct, getCategories, getFormAddNewProduct, getFormProduct, getProduct, getProductForExport, updateProduct } from "../controllers/products";
 
 
 const router  = Router();
@@ -13,4 +13,5 @@ router.get('/get-form-add-new-product', getFormAddNewProduct)
 router.post('/get-export-data-product', getProductForExport)
 //------------------------------------------
 router.post('/category-add-new',addNewCategory)
+router.get('/get-categories',getCategories)
 export default router
