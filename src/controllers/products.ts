@@ -171,7 +171,7 @@ const addNewCategory = async (req: any, res: any) => {
     const newCategory = new CategoryModel(body);
     newCategory.save();
     res.status(200).json({
-      message: `Add New Category Successfully`,
+      message: `Add New Category Successfully!`,
       data: newCategory,
     });
   } catch (error: any) {
