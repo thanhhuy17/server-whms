@@ -1,6 +1,6 @@
 // import moment from "moment";
 import mongoose, { Schema } from "mongoose";
-
+// Product Table
 // const ProductSchema = new Schema({
 //     productId: {
 //         type: String,

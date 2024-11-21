@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+// Category Table
 const CategorySchema = new Schema({
     title: {
         type: String,

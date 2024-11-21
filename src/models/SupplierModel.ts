@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-
+// Supplier Table
 const supplierSchema = new Schema({
     name: {
         type: String,
