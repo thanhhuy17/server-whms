@@ -155,7 +155,7 @@ const getProductForExport = async (req: any, res: any) => {
     });
   }
 };
-//----------------------------------------------------------------
+//------------ CATEGORY ---------------------------------------------------------------------------------------
 // -------- ADD NEW CATEGORY -----------
 const addNewCategory = async (req: any, res: any) => {
   const body = req.body;
@@ -185,7 +185,7 @@ const addNewCategory = async (req: any, res: any) => {
 const getCategories = async (req: any, res: any) => {
   const { page, pageSize } = req.query
   console.log("Test Page Categories: ", page, pageSize);
-  
+
   // Total Row Product
   const total = await CategoryModel.countDocuments();
   console.log("Check Total Page Categories: ", total);
@@ -196,7 +196,7 @@ const getCategories = async (req: any, res: any) => {
     const categories = await CategoryModel.find().skip(skip).limit(pageSize);
     res.status(200).json({
       message: `Get Category Successfully`,
-      data: {total, categories},
+      data: { total, categories },
     });
   } catch (error: any) {
     res.status(404).json({
@@ -204,6 +204,49 @@ const getCategories = async (req: any, res: any) => {
     });
   }
 };
+
+// ------------ UPDATE CATEGORY ------------
+const updateCategory = async (req: any, res: any) => {
+  const body = req.body;
+  const { id } = req.query;
+  // console.log("check id category: ", id);
+  try {
+    const updatedCategory = await CategoryModel.findByIdAndUpdate(id, body, {
+      new: true,
+    });
+
+    if (!updatedCategory) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    res.status(200).json({
+      message: `Category Updated`,
+      data: [],
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      message: error.message,
+    });
+  }
+};
+
+// ------------ DELETE CATEGORY ------------
+const deleteCategory = async (req: any, res: any) => {
+  const { id } = req.query
+  console.log("Check ID Delete Category: ", id);
+  try {
+    await CategoryModel.findByIdAndDelete(id)
+
+    res.status(200).json({
+      message: 'Category Deleted',
+      data: []
+    })
+  } catch (error: any) {
+    res.status(404).json({
+      message: error.message
+    })
+  }
+}
 
 export {
   getProduct,
@@ -214,5 +257,7 @@ export {
   getProductForExport,
   getFormAddNewProduct,
   addNewCategory,
-  getCategories
+  getCategories,
+  updateCategory,
+  deleteCategory
 };
