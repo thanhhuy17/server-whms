@@ -261,7 +261,7 @@ const deleteCategory = async (req: any, res: any) => {
       });
     }
     // Xóa luôn
-    if (!isDeleted) {
+    if (isDeleted===true) {
       await CategoryModel.findByIdAndDelete(id)
       res.status(200).json({
         message: "Category Deleted",
