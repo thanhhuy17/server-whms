@@ -236,6 +236,39 @@ const updateCategory = async (req: any, res: any) => {
 };
 
 // ------------ DELETE CATEGORY ------------
+const findAndRemoveCategoryInProduct = async (id: string) => {
+  const items = await CategoryModel.find({ parentId: id });
+  console.log("Check: ", items);
+  if (items.length > 0) {
+    items.forEach(async (item: any) => await findAndRemoveCategoryInProduct(item._id))
+  }
+  await handleRemoveCategoryInProduct(id)
+}
+
+const handleRemoveCategoryInProduct = async (id: string) => {
+  // await CategoryModel.findByIdAndDelete(id);
+  await CategoryModel.findByIdAndUpdate(id, { isDeleted: true })
+
+  // Tìm những sản phẩm nào mà trước đó có dính dáng với categoryId được gửi lên
+  // thì xóa category trong cái sản phẩm đó đi theo luôn.
+  const products = await ProductModel.find({ categories: { $all: id } });
+  // console.log("SV Product: ", products);
+  if (products && products.length > 0) {
+    products.forEach(async (item: any) => {
+      // Lấy các category ra cho vào mảng cats
+      const cats = item._doc.categories;
+      // So sánh category nào trùng với ID thì xóa ra khỏi mảng cats
+      const index = cats.findIndex((element: string) => element === id);
+      if (index !== -1) {
+        cats.splice(index, 1);
+      }
+      // Update lại ProductModel với Id category đã bị xóa
+      await ProductModel.findByIdAndUpdate(item._id, { categories: cats });
+    });
+  }
+}
+
+
 const deleteCategory = async (req: any, res: any) => {
   const { id, isDeleted } = req.query;
   // If isDeleted === true=> Xoá luôn : Chỉ cập nhật trạng thái hiển thị của Category
@@ -243,39 +276,20 @@ const deleteCategory = async (req: any, res: any) => {
   console.log("Check ID Delete Category: ", id);
 
   try {
-    // Tìm những sản phẩm nào mà trước đó có dính dáng với categoryId được gửi lên
-    // thì xóa category trong cái sản phẩm đó đi theo luôn.
-    const products = await ProductModel.find({ categories: { $all: id } });
-    console.log("SV Product: ", products);
-    if (products && products.length > 0) {
-      products.forEach(async (item: any) => {
-        // Lấy các category ra cho vào mảng cats
-        const cats = item._doc.categories;
-        // So sánh category nào trùng với ID thì xóa ra khỏi mảng cats
-        const index = cats.findIndex((element: string) => element === id);
-        if (index !== -1) {
-          cats.splice(index, 1);
-        }
-        // Update lại ProductModel với Id category đã bị xóa
-        await ProductModel.findByIdAndUpdate(item._id, { categories: cats });
-      });
-    }
+    await findAndRemoveCategoryInProduct(id)
+
     // Xóa luôn
-    if (isDeleted===true) {
+    if (isDeleted === true) {
       await CategoryModel.findByIdAndDelete(id)
-      res.status(200).json({
-        message: "Category Deleted",
-        data: [],
-      });
     }
     // Xóa mềm
     else {
       await CategoryModel.findByIdAndUpdate(id, { isDeleted: true })
-      res.status(200).json({
-        message: "Category Deleted",
-        data: [],
-      });
     }
+    await res.status(200).json({
+      message: "Category Deleted",
+      data: [],
+    });
 
 
   } catch (error: any) {
