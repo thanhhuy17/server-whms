@@ -216,13 +216,12 @@ const updateCategory = async (req: any, res: any) => {
   const { id } = req.query;
   // console.log("check id category: ", id);
   try {
-    const updatedCategory = await CategoryModel.findByIdAndUpdate(id, body, {
-      new: true,
-    });
+    // const updatedCategory = 
+    await CategoryModel.findByIdAndUpdate(id, body);
 
-    if (!updatedCategory) {
-      return res.status(404).json({ message: "Category not found" });
-    }
+    // if (!updatedCategory) {
+    //   return res.status(404).json({ message: "Category not found" });
+    // }
 
     res.status(200).json({
       message: `Category Updated`,
