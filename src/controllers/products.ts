@@ -185,11 +185,9 @@ const addNewCategory = async (req: any, res: any) => {
 // -------- GET CATEGORIES -----------
 const getCategories = async (req: any, res: any) => {
   const { page, pageSize } = req.query;
-  // console.log("Test Page Categories: ", page, pageSize);
+  console.log("Test Page Categories: ", page, pageSize);
 
-  // Total Row Product
-  const total = await CategoryModel.countDocuments();
-  // console.log("Check Total Page Categories: ", total);
+
 
   try {
     const skip = (page - 1) * pageSize;
@@ -199,6 +197,10 @@ const getCategories = async (req: any, res: any) => {
     })
       .skip(skip)
       .limit(pageSize);
+    // Total Row Product
+    const total = await CategoryModel.countDocuments();
+    console.log("Check Total Page Categories: ", total);
+
     res.status(200).json({
       message: `Get Category Successfully`,
       data: { total, categories },
