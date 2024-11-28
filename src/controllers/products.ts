@@ -198,7 +198,9 @@ const getCategories = async (req: any, res: any) => {
       .skip(skip)
       .limit(pageSize);
     // Total Row Product
-    const total = await CategoryModel.countDocuments();
+    const total = await CategoryModel.countDocuments({
+      $or: [{ isDeleted: false }, { isDeleted: null }],
+    });
     console.log("Check Total Page Categories: ", total);
 
     res.status(200).json({
