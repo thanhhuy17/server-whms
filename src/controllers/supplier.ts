@@ -1,4 +1,6 @@
+import mongoose from "mongoose";
 import { supplierForm } from "../forms/supplier";
+import CategoryModel from "../models/CategoryModel";
 import SupplierModel from "../models/SupplierModel"
 
 
@@ -70,13 +72,15 @@ const getSuppliers = async (req: any, res: any) => {
 //     }
 // };
 
-
+//     ----------------
 // -------- ADD NEW SUPPLIER ---------
 const addNewSupplier = async (req: any, res: any) => {
     const body = req.body
-
+    console.log("Check 1: ", body)
+    
     try {
         const newSupplier = new SupplierModel(body)
+        console.log("Check 2: ",newSupplier);
         newSupplier.save()
         res.status(200).json({
             message: 'Add New Supplier Successfully',
@@ -88,6 +92,35 @@ const addNewSupplier = async (req: any, res: any) => {
         })
     }
 }
+
+// const addNewSupplier = async (req: any, res: any) => {
+//     const body = req.body;
+//     console.log(body);
+
+//     try {
+//         // Chuyển categoryId thành ObjectId nếu là chuỗi
+//         const categoryIds = body.categories.map((categoryId: string) =>new mongoose.Types.ObjectId(categoryId));
+
+//         // Tạo mới nhà cung cấp với categoryIds đã chuyển thành ObjectId
+//         const newSupplier = new SupplierModel({
+//             ...body,
+//             categories: categoryIds,  // Gán categories là mảng ObjectId
+//         });
+
+//         // Lưu nhà cung cấp mới
+//         await newSupplier.save();
+
+//         res.status(200).json({
+//             message: 'Add New Supplier Successfully',
+//             data: newSupplier,
+//         });
+//     } catch (error: any) {
+//         res.status(404).json({
+//             message: error.message,
+//         });
+//     }
+// };
+
 // -------- UPDATE SUPPLIER ---------
 const updateSupplier = async (req: any, res: any) => {
     const body = req.body
