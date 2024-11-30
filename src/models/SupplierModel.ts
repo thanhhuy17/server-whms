@@ -9,13 +9,13 @@ const supplierSchema = new Schema({
     product: String,
     email: String,
     active: Number,
-    category: {
-        type: [String]
-    },
-    // categories: [{
-    //     type: mongoose.Schema.Types.ObjectId,  // Dùng ObjectId cho category
-    //     ref: 'categories'  // Chỉ định đây là tham chiếu đến collection 'Category' (nếu có)
-    // }],
+    // category: {
+    //     type: [String]
+    // },
+    categories: [{
+        type: mongoose.Schema.Types.ObjectId,  // Dùng ObjectId cho category
+        ref: 'categories'  // Chỉ định đây là tham chiếu đến collection 'Category' (nếu có)
+    }],
     price: Number,
     contactNumber: String,
     isTaking: {
