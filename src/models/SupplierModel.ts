@@ -12,9 +12,9 @@ const supplierSchema = new Schema({
     // category: {
     //     type: [String]
     // },
-    categories: [{
+    category: [{
         type: mongoose.Schema.Types.ObjectId,  // Dùng ObjectId cho category
-        ref: 'categories'  // Chỉ định đây là tham chiếu đến collection 'Category' (nếu có)
+        ref: 'category'  // Chỉ định đây là tham chiếu đến collection 'Category' (nếu có)
     }],
     price: Number,
     contactNumber: String,
