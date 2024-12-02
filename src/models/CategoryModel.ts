@@ -14,10 +14,12 @@ const CategorySchema = new Schema({
         type: Date,
         default: Date.now,
     },
+    userCreated: String,
     updatedAt: {
         type: Date,
         default: Date.now,
     },
+    userEdited: String,
     isDeleted: {
         type: Boolean,
         default: false
