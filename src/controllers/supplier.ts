@@ -12,11 +12,13 @@ const getSuppliers = async (req: any, res: any) => {
         const skip = (page - 1) * pageSize
         // Only Show Supplier have isDeleted === false
         const items = await SupplierModel
-        .find({ isDeleted: false })
-        .skip(skip).limit(pageSize)
-        .populate('category', 'title'); // 'categories' là trường tham chiếu đến Category, 'title' là tên trường bạn muốn lấy;
+            .find({ isDeleted: false })
+            .skip(skip).limit(pageSize)
+            .populate('category', 'title'); // 'category' là trường tham chiếu đến Category, 'title' là tên trường bạn muốn lấy;
         // Total row
-        const total = await SupplierModel.countDocuments()
+        const total = await SupplierModel.countDocuments({
+            $or: [{ isDeleted: false }, { isDeleted: null }],
+        })
         console.log("Check Total: ", total);
 
 

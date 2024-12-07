@@ -12,12 +12,16 @@ const getProduct = async (req: any, res: any) => {
     const skip = (page - 1) * pageSize;
 
     // Only Show Supplier have isDeleted === false
-    const items = await ProductModel.find({ isDeleted: false })
+    const items = await ProductModel.find({
+      $or: [{ isDeleted: false }, { isDeleted: null }],
+    })
       .skip(skip)
       .limit(pageSize);
 
     // Total Row Product
-    const total = await ProductModel.countDocuments();
+    const total = await ProductModel.countDocuments({
+      $or: [{ isDeleted: false }, { isDeleted: null }],
+    });
     console.log("Check Total Page Products: ", total);
 
     res.status(200).json({
@@ -187,8 +191,6 @@ const getCategories = async (req: any, res: any) => {
   const { page, pageSize } = req.query;
   console.log("Test Page Categories: ", page, pageSize);
 
-
-
   try {
     const skip = (page - 1) * pageSize;
 
@@ -196,8 +198,10 @@ const getCategories = async (req: any, res: any) => {
       $or: [{ isDeleted: false }, { isDeleted: null }],
     })
       .skip(skip)
-      .limit(pageSize);
-    // Total Row Product
+      .limit(pageSize)
+      // .populate('category', 'title'); // 'category' là trường tham chiếu đến Category, 'title' là tên trường bạn muốn lấy;
+      
+    // Total Row Category
     const total = await CategoryModel.countDocuments({
       $or: [{ isDeleted: false }, { isDeleted: null }],
     });

@@ -1,5 +1,6 @@
 // import moment from "moment";
 import mongoose, { Schema } from "mongoose";
+import { getSuppliersForExport } from "../controllers/supplier";
 // Product Table
 // const ProductSchema = new Schema({
 //     productId: {
@@ -58,10 +59,10 @@ const ProductSchema = new Schema({
     slug: String,
     description: String,
     categories: [String],
-    supplier:{
+    suppliers:[{
         require: true,
         type: String
-    },
+    }],
     expiryDate: {
         type: Date,
         default: Date.now,
