@@ -16,8 +16,8 @@ const getProduct = async (req: any, res: any) => {
       $or: [{ isDeleted: false }, { isDeleted: null }],
     })
       .skip(skip)
-      .limit(pageSize);
-
+      .limit(pageSize)
+      .populate('suppliers', 'name').populate('categories', 'title')
     // Total Row Product
     const total = await ProductModel.countDocuments({
       $or: [{ isDeleted: false }, { isDeleted: null }],
@@ -199,8 +199,8 @@ const getCategories = async (req: any, res: any) => {
     })
       .skip(skip)
       .limit(pageSize)
-      // .populate('category', 'title'); // 'category' là trường tham chiếu đến Category, 'title' là tên trường bạn muốn lấy;
-      
+    // .populate('category', 'title'); // 'category' là trường tham chiếu đến Category, 'title' là tên trường bạn muốn lấy;
+
     // Total Row Category
     const total = await CategoryModel.countDocuments({
       $or: [{ isDeleted: false }, { isDeleted: null }],

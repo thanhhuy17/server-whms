@@ -29,7 +29,6 @@ const getSuppliers = async (req: any, res: any) => {
     } catch (error: any) {
         res.status(404).json({
             message: error.message
-            // message: "error.message HUY"
         })
     }
 }

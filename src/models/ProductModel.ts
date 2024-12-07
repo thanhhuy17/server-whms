@@ -58,10 +58,18 @@ const ProductSchema = new Schema({
     },
     slug: String,
     description: String,
-    categories: [String],
-    suppliers:[{
-        require: true,
-        type: String
+    // categories: [String],
+    categories: [{
+        type: mongoose.Schema.Types.ObjectId,  // Dùng ObjectId cho category
+        ref: 'category'  // Chỉ định đây là tham chiếu đến collection 'Category' (nếu có)
+    }],
+    // suppliers:[{
+    //     require: true,
+    //     type: String
+    // }],
+    suppliers: [{
+        type: mongoose.Schema.Types.ObjectId,  // Dùng ObjectId cho suppliers
+        ref: 'suppliers'  // Chỉ định đây là tham chiếu đến collection 'Suppliers' (nếu có)
     }],
     expiryDate: {
         type: Date,
