@@ -78,8 +78,10 @@ const updateProduct = async (req: any, res: any) => {
 // ------------ DELETE PRODUCT ------------
 const deleteProduct = async (req: any, res: any) => {
   const { id } = req.query;
+  console.log("Id Delete Product: ", id);
   try {
-    await ProductModel.findByIdAndDelete(id);
+    // await ProductModel.findByIdAndDelete(id);
+    await ProductModel.findByIdAndUpdate(id, { isDeleted: true });
 
     res.status(200).json({
       message: "Product Deleted",
