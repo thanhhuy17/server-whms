@@ -3,7 +3,7 @@ import { addNewCategory, addNewProduct, deleteCategory, deleteProduct, getCatego
 
 
 const router = Router();
-
+//---------------- PRODUCT -----------------
 router.get('/', getProduct)
 router.post('/add-new-product', addNewProduct)
 router.put('/update-product', updateProduct)
@@ -11,7 +11,7 @@ router.delete('/delete-product', deleteProduct)
 router.get('/get-form-product', getFormProduct)
 router.get('/get-form-add-new-product', getFormAddNewProduct)
 router.post('/get-export-data-product', getProductForExport)
-//------------------------------------------
+//---------------- CATEGORY -----------------
 router.post('/category-add-new', addNewCategory)
 router.get('/get-categories', getCategories)
 router.put('/update-category', updateCategory)

@@ -80,6 +80,9 @@ const ProductSchema = new Schema({
         enum: ["New", "Pending", "Approved", "Rejected"],
         default: 'New'
     },
+    photoUrls: {
+        type: [String]
+    },
     userCreated: String,
     dateCreated: {
         type: Date,
