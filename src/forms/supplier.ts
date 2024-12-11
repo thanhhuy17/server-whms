@@ -38,15 +38,15 @@ export const supplierForm = {
             message: `Enter Product!`,
             label: `Product`,
             placeholder: `Enter Product`,
-            type: `input`,
+            type: `select`,
             displayLength: 150
 
         },
         {
             key: `category`,
             value: `category`,
-            // require: true,
-            // message: `Enter Product!`,
+            require: true,
+            message: `Enter Category!`,
             label: `Category`,
             placeholder: `Select product category`,
             type: `select`,

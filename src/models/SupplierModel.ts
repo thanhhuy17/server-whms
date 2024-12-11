@@ -6,7 +6,11 @@ const supplierSchema = new Schema({
         require: true
     },
     slug: String,
-    product: String,
+    // product: String,
+    product: [{
+        type: mongoose.Schema.Types.ObjectId,  // Dùng ObjectId cho product
+        ref: 'products'  // Chỉ định đây là tham chiếu đến collection 'Product' (nếu có)
+    }],
     email: String,
     active: Number,
     // category: {

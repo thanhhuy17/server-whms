@@ -101,10 +101,3 @@ export const productForm = {
 
     ]
 }
-
-// ------------ SUPPLIER COLUMN TABLE --------------
-// export const supplierCol = [
-//     {
-
-//     }
-// ]

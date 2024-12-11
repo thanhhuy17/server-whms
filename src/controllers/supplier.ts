@@ -14,7 +14,8 @@ const getSuppliers = async (req: any, res: any) => {
         const items = await SupplierModel
             .find({ isDeleted: false })
             .skip(skip).limit(pageSize)
-            .populate('category', 'title'); // 'category' là trường tham chiếu đến Category, 'title' là tên trường bạn muốn lấy;
+            .populate('category', 'title')// 'category' là trường tham chiếu đến Category, 'title' là tên trường bạn muốn lấy;
+            .populate('product', 'productName')
         // Total row
         const total = await SupplierModel.countDocuments({
             $or: [{ isDeleted: false }, { isDeleted: null }],
