@@ -34,7 +34,7 @@ export const supplierForm = {
         {
             key: `product`,
             value: `product`,
-            require: true,
+            // require: true,
             message: `Enter Product!`,
             label: `Product`,
             placeholder: `Enter Product`,
