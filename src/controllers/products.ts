@@ -17,7 +17,8 @@ const getProduct = async (req: any, res: any) => {
     })
       .skip(skip)
       .limit(pageSize)
-      .populate('suppliers', 'name').populate('categories', 'title')
+      .populate("suppliers", "name")
+      .populate("categories", "title");
     // Total Row Product
     const total = await ProductModel.countDocuments({
       $or: [{ isDeleted: false }, { isDeleted: null }],
@@ -200,7 +201,7 @@ const getCategories = async (req: any, res: any) => {
       $or: [{ isDeleted: false }, { isDeleted: null }],
     })
       .skip(skip)
-      .limit(pageSize)
+      .limit(pageSize);
     // .populate('category', 'title'); // 'category' là trường tham chiếu đến Category, 'title' là tên trường bạn muốn lấy;
 
     // Total Row Category
@@ -220,13 +221,31 @@ const getCategories = async (req: any, res: any) => {
   }
 };
 
+// -------- GET CATEGORY DETAIL -----------
+const getCategoryDetail = async (req: any, res: any) => {
+  const { id } = req.query;
+
+  try {
+    const item = await CategoryModel.findById(id);
+
+    res.status(200).json({
+      message: `Get Category Detail Successfully`,
+      data: item,
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      message: error.message,
+    });
+  }
+};
+
 // ------------ UPDATE CATEGORY ------------
 const updateCategory = async (req: any, res: any) => {
   const body = req.body;
   const { id } = req.query;
   // console.log("check id category: ", id);
   try {
-    // const updatedCategory = 
+    // const updatedCategory =
     await CategoryModel.findByIdAndUpdate(id, body);
 
     // if (!updatedCategory) {
@@ -249,14 +268,16 @@ const findAndRemoveCategoryInProduct = async (id: string) => {
   const items = await CategoryModel.find({ parentId: id });
   console.log("Check: ", items);
   if (items.length > 0) {
-    items.forEach(async (item: any) => await findAndRemoveCategoryInProduct(item._id))
+    items.forEach(
+      async (item: any) => await findAndRemoveCategoryInProduct(item._id)
+    );
   }
-  await handleRemoveCategoryInProduct(id)
-}
+  await handleRemoveCategoryInProduct(id);
+};
 
 const handleRemoveCategoryInProduct = async (id: string) => {
   // await CategoryModel.findByIdAndDelete(id);
-  await CategoryModel.findByIdAndUpdate(id, { isDeleted: true })
+  await CategoryModel.findByIdAndUpdate(id, { isDeleted: true });
 
   // Tìm những sản phẩm nào mà trước đó có dính dáng với categoryId được gửi lên
   // thì xóa category trong cái sản phẩm đó đi theo luôn.
@@ -275,8 +296,7 @@ const handleRemoveCategoryInProduct = async (id: string) => {
       await ProductModel.findByIdAndUpdate(item._id, { categories: cats });
     });
   }
-}
-
+};
 
 const deleteCategory = async (req: any, res: any) => {
   const { id, isDeleted } = req.query;
@@ -285,22 +305,20 @@ const deleteCategory = async (req: any, res: any) => {
   console.log("Check ID Delete Category: ", id);
 
   try {
-    await findAndRemoveCategoryInProduct(id)
+    await findAndRemoveCategoryInProduct(id);
 
     // Xóa luôn
     if (isDeleted === true) {
-      await CategoryModel.findByIdAndDelete(id)
+      await CategoryModel.findByIdAndDelete(id);
     }
     // Xóa mềm
     else {
-      await CategoryModel.findByIdAndUpdate(id, { isDeleted: true })
+      await CategoryModel.findByIdAndUpdate(id, { isDeleted: true });
     }
     await res.status(200).json({
       message: "Category Deleted",
       data: [],
     });
-
-
   } catch (error: any) {
     res.status(404).json({
       message: error.message,
@@ -318,6 +336,7 @@ export {
   getFormAddNewProduct,
   addNewCategory,
   getCategories,
+  getCategoryDetail,
   updateCategory,
   deleteCategory,
 };

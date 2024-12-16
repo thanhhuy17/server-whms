@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addNewCategory, addNewProduct, deleteCategory, deleteProduct, getCategories, getFormAddNewProduct, getFormProduct, getProduct, getProductForExport, updateCategory, updateProduct } from "../controllers/products";
+import { addNewCategory, addNewProduct, deleteCategory, deleteProduct, getCategories, getCategoryDetail, getFormAddNewProduct, getFormProduct, getProduct, getProductForExport, updateCategory, updateProduct } from "../controllers/products";
 
 
 const router = Router();
@@ -14,6 +14,7 @@ router.post('/get-export-data-product', getProductForExport)
 //---------------- CATEGORY -----------------
 router.post('/category-add-new', addNewCategory)
 router.get('/get-categories', getCategories)
+router.get('/categories/detail', getCategoryDetail)
 router.put('/update-category', updateCategory)
 router.delete('/delete-category', deleteCategory)
 export default router
