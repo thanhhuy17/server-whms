@@ -1,17 +1,24 @@
 import { Router } from "express";
-import { addNewSupplier, deleteSupplier, getFormSupplier, getSuppliers, getSuppliersForExport, updateSupplier } from "../controllers/supplier";
+import {
+  addNewSupplier,
+  deleteSupplier,
+  getFormSupplier,
+  getSuppliers,
+  getSuppliersForExport,
+  updateSupplier,
+} from "../controllers/supplier";
 
-const router = Router()
+const router = Router();
 // Get All cho phep frontend lay du lieu
-router.get('/', getSuppliers)
+router.get("/", getSuppliers);
 // Dua du lieu tu frontend len
-router.post('/add-new-supplier', addNewSupplier)
+router.post("/add-new-supplier", addNewSupplier);
 // Update data Supplier
-router.put('/update-supplier', updateSupplier)
+router.put("/update-supplier", updateSupplier);
 // Delete data Supplier
-router.delete('/delete-supplier', deleteSupplier)
+router.delete("/delete-supplier", deleteSupplier);
 // Get Form Supplier API
-router.get(`/get-form-supplier`, getFormSupplier)
+router.get(`/get-form-supplier`, getFormSupplier);
 // Đưa dữ liệu ngày tháng từ frontend lên
-router.post(`/get-export-data-supplier`, getSuppliersForExport)
-export default router
+router.post(`/get-export-data-supplier`, getSuppliersForExport);
+export default router;

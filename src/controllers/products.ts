@@ -2,6 +2,7 @@ import { addNewProductForm } from "../forms/addNewProduct";
 import { productForm } from "../forms/product";
 import CategoryModel from "../models/CategoryModel";
 import ProductModel from "../models/ProductModel";
+import SubProductModel from "../models/SubProductModel";
 import SupplierModel from "../models/SupplierModel";
 
 // -------- GET ALL PRODUCTS -----------
@@ -163,6 +164,25 @@ const getProductForExport = async (req: any, res: any) => {
     });
   }
 };
+
+// ------------ ADD SUB PRODUCT -------------
+const addSubProduct = async (req: any, res: any) => {
+  const body = req.body;
+
+  try {
+    const newSubProduct = new SubProductModel(body);
+    await newSubProduct.save();
+    res.status(200).json({
+      message: `Add New SubProduct Successfully`,
+      data: newSubProduct,
+    });
+  } catch (error: any) {
+    res.status(404).json({
+      message: error.message,
+    });
+  }
+};
+
 //------------ CATEGORY ---------------------------------------------------------------------------------------
 // -------- ADD NEW CATEGORY -----------
 const addNewCategory = async (req: any, res: any) => {
@@ -339,4 +359,5 @@ export {
   getCategoryDetail,
   updateCategory,
   deleteCategory,
+  addSubProduct,
 };

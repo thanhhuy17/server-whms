@@ -1,6 +1,5 @@
 // import moment from "moment";
 import mongoose, { Schema } from "mongoose";
-import { getSuppliersForExport } from "../controllers/supplier";
 // Product Table
 // const ProductSchema = new Schema({
 //     productId: {
