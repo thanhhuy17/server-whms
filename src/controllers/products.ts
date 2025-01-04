@@ -126,7 +126,7 @@ const getFormAddNewProduct = async (req: any, res: any) => {
   }
 };
 
-// --------------- GET PRODUCTS FOR EXPORT ---------------------
+// --------------- GET PRODUCTS FOR EXPORT (Important) ---------------------
 const getProductForExport = async (req: any, res: any) => {
   const body = req.body;
   const { start, end } = req.query;
