@@ -3,7 +3,7 @@ import { productForm } from "../forms/product";
 import CategoryModel from "../models/CategoryModel";
 import ProductModel from "../models/ProductModel";
 import SubProductModel from "../models/SubProductModel";
-import SupplierModel from "../models/SupplierModel";
+// import SupplierModel from "../models/SupplierModel";
 
 // -------- GET ALL PRODUCTS -----------
 const getProduct = async (req: any, res: any) => {
