@@ -13,7 +13,7 @@ const getProduct = async (req: any, res: any) => {
     const skip = (page - 1) * pageSize;
 
     // Only Show Supplier have isDeleted === false
-    const items = await ProductModel.find({
+    const products = await ProductModel.find({
       $or: [{ isDeleted: false }, { isDeleted: null }],
     })
       .skip(skip)
@@ -25,11 +25,31 @@ const getProduct = async (req: any, res: any) => {
       $or: [{ isDeleted: false }, { isDeleted: null }],
     });
     console.log("Check Total Page Products: ", total);
+    const items: any = []
+    if (products.length > 0) {
+      products.forEach(async (item: any) => {
+        const children = await SubProductModel.find({ productId: item._id })
 
-    res.status(200).json({
-      message: "Get All Products Successfully",
-      data: { total, items },
-    });
+        items.push({
+          ...item._doc,
+          children,
+        })
+        items.length === products.length && res.status(200).json({
+          message: "Get All Products Successfully",
+          data: { total, items }
+        });
+      })
+    } else {
+      res.status(200).json({
+        message: "Get All Products Successfully",
+        // data: { total, products },
+        data: [],
+      });
+    }
+
+
+
+
   } catch (error: any) {
     res.status(404).json({
       message: error.message,
