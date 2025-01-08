@@ -12,7 +12,7 @@ const getProduct = async (req: any, res: any) => {
   try {
     const skip = (page - 1) * pageSize;
 
-    // Only Show Supplier have isDeleted === false
+    // Only Show Supplier have isDeleted === false. 
     const products = await ProductModel.find({
       $or: [{ isDeleted: false }, { isDeleted: null }],
     })
