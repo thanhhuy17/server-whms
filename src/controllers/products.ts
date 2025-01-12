@@ -31,8 +31,8 @@ const getProduct = async (req: any, res: any) => {
         const children = await SubProductModel.find({ productId: item._id })
 
         items.push({
-          ...item._doc,
-          children,
+          ...item._doc,          
+          subItems: children,
         })
         items.length === products.length && res.status(200).json({
           message: "Get All Products Successfully",
