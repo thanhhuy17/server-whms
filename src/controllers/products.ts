@@ -12,7 +12,7 @@ const getProduct = async (req: any, res: any) => {
   try {
     const skip = (page - 1) * pageSize;
 
-    // Only Show Supplier have isDeleted === false. 
+    // Only Show Supplier have isDeleted === false.
     const products = await ProductModel.find({
       $or: [{ isDeleted: false }, { isDeleted: null }],
     })
@@ -25,20 +25,21 @@ const getProduct = async (req: any, res: any) => {
       $or: [{ isDeleted: false }, { isDeleted: null }],
     });
     console.log("Check Total Page Products: ", total);
-    const items: any = []
+    const items: any = [];
     if (products.length > 0) {
       products.forEach(async (item: any) => {
-        const children = await SubProductModel.find({ productId: item._id })
+        const children = await SubProductModel.find({ productId: item._id });
 
         items.push({
-          ...item._doc,          
+          ...item._doc,
           subItems: children,
-        })
-        items.length === products.length && res.status(200).json({
-          message: "Get All Products Successfully",
-          data: { total, items }
         });
-      })
+        items.length === products.length &&
+          res.status(200).json({
+            message: "Get All Products Successfully",
+            data: { total, items },
+          });
+      });
     } else {
       res.status(200).json({
         message: "Get All Products Successfully",
@@ -46,10 +47,6 @@ const getProduct = async (req: any, res: any) => {
         data: [],
       });
     }
-
-
-
-
   } catch (error: any) {
     res.status(404).json({
       message: error.message,
@@ -98,11 +95,22 @@ const updateProduct = async (req: any, res: any) => {
 };
 
 // ------------ DELETE PRODUCT ------------
+
+const handleDeleteSubProduct = async (items: any[]) => {
+  items.forEach(async (item) => {
+    await SubProductModel.findByIdAndUpdate(item._id, { isDeleted: true });
+  });
+};
+
 const deleteProduct = async (req: any, res: any) => {
   const { id } = req.query;
-  console.log("Id Delete Product: ", id);
   try {
-    // await ProductModel.findByIdAndDelete(id);
+    // Search SubProducts Exist?
+    const subItems = await SubProductModel.find({ productId: id });
+    if (subItems.length > 0) {
+      await handleDeleteSubProduct(subItems);
+    }
+    // Not Exist
     await ProductModel.findByIdAndUpdate(id, { isDeleted: true });
 
     res.status(200).json({

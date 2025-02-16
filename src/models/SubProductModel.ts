@@ -18,6 +18,15 @@ const schema = new Schema(
       required: true,
     },
     image: [String],
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    userEdited: String,
+    dateEdited: {
+      type: Date,
+      default: Date.now,
+    },
   },
   { timestamps: true }
 );
