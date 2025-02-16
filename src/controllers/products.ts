@@ -69,6 +69,27 @@ const addNewProduct = async (req: any, res: any) => {
     });
   }
 };
+// ------------ GET 1 PRODUCT DETAIL ------------
+const getProductDetail = async (req: any, res: any) => {
+  const { id } = req.query
+  console.log("Product_ID send to sever: ", id)
+  try {
+    // const productDetail = await ProductModel.findById(id, {
+    //   $or: [{ isDeleted: false }, { isDeleted: null }],
+    // })
+    const productDetail = await ProductModel.findById(id)
+
+    res.status(200).json({
+      message: `Get Product Detail Successfully`,
+      data: productDetail,
+    })
+  } catch (error: any) {
+    res.status(404).json({
+      message: error.message,
+    })
+  }
+}
+
 // ------------ UPDATE PRODUCT ------------
 const updateProduct = async (req: any, res: any) => {
   const body = req.body;
@@ -379,6 +400,7 @@ export {
   addNewProduct,
   getFormProduct,
   deleteProduct,
+  getProductDetail,
   updateProduct,
   getProductForExport,
   getFormAddNewProduct,
@@ -388,4 +410,5 @@ export {
   updateCategory,
   deleteCategory,
   addSubProduct,
+
 };

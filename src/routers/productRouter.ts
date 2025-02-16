@@ -10,6 +10,7 @@ import {
   getFormAddNewProduct,
   getFormProduct,
   getProduct,
+  getProductDetail,
   getProductForExport,
   updateCategory,
   updateProduct,
@@ -23,6 +24,7 @@ router.put("/update-product", updateProduct);
 router.delete("/delete-product", deleteProduct);
 router.get("/get-form-product", getFormProduct);
 router.get("/get-form-add-new-product", getFormAddNewProduct);
+router.get("/get-product-detail", getProductDetail);
 router.post("/get-export-data-product", getProductForExport);
 router.post("/add-sub-product", addSubProduct);
 //---------------- CATEGORY -----------------
