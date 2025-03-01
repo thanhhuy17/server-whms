@@ -98,16 +98,18 @@ const loginWithGoogle = async (req: any, res: any) => {
         const user: any = await UserModel.findOne({ email })
         if (user) {
             // throw new Error(`Tài khoản đã tồn tại`)
+            await UserModel.findByIdAndUpdate(user._id, body)
+            const newUser:any = await UserModel.findById(user._id) 
 
-            delete user._doc.password;
+            delete newUser._doc.password;
 
             res.status(200).json({
                 message: "Login Successfully",
                 data: {
-                    ...user._doc, token: await getAccessToken({
-                        _id: user._id,
-                        email: user.email,
-                        rule: user.rule ?? 1
+                    ...newUser._doc, token: await getAccessToken({
+                        _id: newUser._id,
+                        email: newUser.email,
+                        rule: newUser.rule ?? 1
                     }),
                 },
             })
